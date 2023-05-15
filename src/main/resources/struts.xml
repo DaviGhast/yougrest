@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <package name="default" extends="struts-default">
+    
+    	<!-- <interceptors>
+    		<interceptor name="autenticationInterceptor" 
+    			class="org.ghast.grest.presentation.controller.AutenticationInterceptor" />
+    		<interceptor-stack name="secureStack">
+    			<interceptor-ref name="autenticationInterceptor" />
+    			<interceptor-ref name="defaultStack" />
+    		</interceptor-stack>
+    	</interceptors> -->
+    
+    	<default-action-ref name="index" />
+    	
+    	<global-results>
+    		<result name="error">/globalException.jsp</result>
+    		<result name="login">/sessionexpired.jsp</result>
+    	</global-results>
+    	
+    	<global-exception-mappings>
+    		<exception-mapping result="error" exception="java.lang.Exception" />
+    	</global-exception-mappings>
+        
+        <action name="login" class="org.ghast.grest.presentation.controller.impl.LoginAction">
+      		<result name="input" type="redirectAction">
+         		<param name="actionName">LoginError</param>
+         		<param name="suppressEmptyParameters">true</param>
+      		</result>
+      		<!-- <result name="input">/index.jsp</result> -->
+      		<result name="login">/userUsedYet.jsp</result>
+      		<result name="success" type="redirectAction">
+         		<param name="actionName">LoginSuccess</param>
+         		<param name="suppressEmptyParameters">true</param>
+      		</result>
+    	</action>
+    	
+    	<action name="LoginSuccess">
+    		<result type="redirectAction">
+         		<param name="actionName">GetUserInfo</param>
+         		<param name="suppressEmptyParameters">true</param>
+      		</result>
+ 		</action>
+ 		
+ 		<action name="LoginError">
+       		<result>/index.jsp</result>
+ 		</action>
+ 		
+ 		<action name="GetUserInfo" class="org.ghast.grest.presentation.controller.impl.GetUserInfoImpl">
+ 			<result name="success" type="redirectAction">
+         		<param name="actionName">PreHome</param>
+         		<param name="suppressEmptyParameters">true</param>
+      		</result>
+    	</action>
+ 		
+ 		<action name="PreHome" 
+ 		class="org.ghast.grest.presentation.controller.PreHomeAction">
+ 			<result>/pages/preHome.jsp</result>
+    	</action>
+ 		
+ 		<action name="SelectOratory" 
+ 			class="org.ghast.grest.presentation.controller.impl.SelectOratoryImpl">
+ 			<result name="success" type="redirectAction">
+         		<param name="actionName">Home</param>
+         		<param name="suppressEmptyParameters">true</param>
+      		</result>
+    	</action>
+    	
+    	<action name="IndicatorsMenu" 
+    		class="org.ghast.grest.presentation.controller.IndicatorsMenuAction">
+    		<!-- <result name="success">/pages/home.jsp</result> -->
+ 			<!-- <result name="success" type="redirectAction">
+         		<param name="actionName">toHome</param>
+         		<param name="suppressEmptyParameters">true</param>
+      		</result> -->
+      		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+ 		
+ 		<action name="toHome">
+ 			<result>/pages/home.jsp</result>
+    	</action>
+ 		
+ 		<action name="Home" 
+ 			class="org.ghast.grest.presentation.controller.HomePageAction">
+ 			<result name="success">/pages/home.jsp</result>
+      		<result name="login">/sessionexpired.jsp</result>
+    	</action>
+    	
+    	<action name="toSubsPage">
+ 			<result>/pages/subsPage.jsp</result>
+    	</action>
+    	
+    	<action name="toReceiptsPage">
+ 			<result>/pages/receiptsPage.jsp</result>
+    	</action>
+    	
+    	<action name="ReportsPage" 
+ 			class="org.ghast.grest.presentation.controller.ReportsPageAction">
+ 			<result name="success">/pages/reportsPage.jsp</result>
+      		<result name="login">/sessionexpired.jsp</result>
+    	</action>
+    	
+    	<action name="PersonSubListByGrest" 
+    		class="org.ghast.grest.presentation.controller.impl.PersonSubListByGrestImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="ReceiptListByGrest" 
+    		class="org.ghast.grest.presentation.controller.impl.ReceiptListByGrestImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="RegistersPage" 
+ 			class="org.ghast.grest.presentation.controller.RegistersPageAction">
+ 			<result name="success">/pages/registersPage.jsp</result>
+      		<result name="login">/sessionexpired.jsp</result>
+    	</action>
+    	
+    	<action name="toNewSub">
+ 			<result>/pages/newSubPage.jsp</result>
+    	</action>
+    	
+    	<action name="PersonNotSubListByGrest" 
+    		class="org.ghast.grest.presentation.controller.impl.PersonNotSubListByGrestImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="GetPersonById" 
+    		class="org.ghast.grest.presentation.controller.impl.GetPersonByIdImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="GetSubById" 
+    		class="org.ghast.grest.presentation.controller.impl.GetSubByIdImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="InsertNewPerson" 
+ 			class="org.ghast.grest.presentation.controller.impl.InsertNewPersonImpl">
+ 			<result name="success">/pages/newSubPage.jsp</result>
+    	</action>
+    	
+    	<action name="InsertNewSub" 
+ 			class="org.ghast.grest.presentation.controller.impl.InsertNewSubImpl">
+ 			<result name="success">/pages/newSubPage.jsp</result>
+    	</action>
+    	
+    	<action name="UpdatePersonAndSub" 
+ 			class="org.ghast.grest.presentation.controller.impl.UpdatePersonAndSubImpl">
+ 			<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="SubPayments" 
+ 			class="org.ghast.grest.presentation.controller.SubPaymentsPageAction">
+ 			<result name="success">/pages/subPaymentPage.jsp</result>
+      		<result name="login">/sessionexpired.jsp</result>
+    	</action>
+    	
+    	<action name="CreateReceipt" 
+    		class="org.ghast.grest.presentation.controller.CreateReceipt">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="UpdateSubPayment" 
+    		class="org.ghast.grest.presentation.controller.impl.UpdateSubPaymentImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="UpdateSubWeek" 
+    		class="org.ghast.grest.presentation.controller.impl.UpdateSubWeekImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="SaveReceipt" 
+    		class="org.ghast.grest.presentation.controller.impl.SaveReceiptImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="UpdateBus" 
+    		class="org.ghast.grest.presentation.controller.impl.UpdateBusImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="UpdateWeek" 
+    		class="org.ghast.grest.presentation.controller.impl.UpdateWeekImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="GetWeekById" 
+    		class="org.ghast.grest.presentation.controller.impl.GetWeekByIdImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="GetCacheWeekById"
+    		class="org.ghast.grest.presentation.controller.impl.GetCacheWeekByIdImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="GetRegisterByType"
+    		class="org.ghast.grest.presentation.controller.impl.GetRegisterByTypeImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="GetSubWeekList"
+    		class="org.ghast.grest.presentation.controller.impl.GetSubWeekListImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="GetSubLunchList"
+    		class="org.ghast.grest.presentation.controller.impl.GetSubLunchListImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="GetSubPoolList"
+    		class="org.ghast.grest.presentation.controller.impl.GetSubPoolListImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="WelcomePage" 
+ 			class="org.ghast.grest.presentation.controller.WelcomePageAction">
+ 			<result name="success">/pages/welcomePage.jsp</result>
+      		<result name="login">/sessionexpired.jsp</result>
+    	</action>
+    	
+    	<action name="InsertRegister"
+    		class="org.ghast.grest.presentation.controller.impl.InsertRegisterImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="RegisterDuplicate"
+    		class="org.ghast.grest.presentation.controller.impl.RegisterDuplicateImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="CheckPool"
+    		class="org.ghast.grest.presentation.controller.impl.CheckPoolImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="CheckLunch"
+    		class="org.ghast.grest.presentation.controller.impl.CheckLunchImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="CheckAuthExit"
+    		class="org.ghast.grest.presentation.controller.impl.CheckAuthExitImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+        
+    </package>
+
+</struts>
