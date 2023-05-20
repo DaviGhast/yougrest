@@ -33,7 +33,7 @@
        		<span class="" style="color: grey;">
 				<b>Oratorio di Iscrizione*</b>
 			</span>
-			<select class="input100" id="user" name="inParam2" required="required">
+			<select class="input100" id="subOratory" name="inParam2" required="required">
 				<option value=""></option>
 				<c:forEach var="res" items="${sessionScope.login.listOratories}">
 	                <option value="${res.id}">${res.location}</option>
@@ -51,7 +51,7 @@
        		<span class="" style="color: grey;">
 				<b>Squadra</b>
 			</span>
-			<select class="input100" id="user" name="inParam3">
+			<select class="input100" id="squad" name="inParam3">
 				<option value=""></option>
 				<option>GIALLI</option>
 				<option>BLU</option>
@@ -64,7 +64,7 @@
        		<span class="" style="color: grey;">
 				<b>Taglia Maglietta*</b>
 			</span>
-			<select class="input100" type="text" id="user" name="inParam4" placeholder="User" required="required">
+			<select class="input100" type="text" id="tshirt" name="inParam4" placeholder="User" required="required">
 				<option value=""></option>
 				<option>7-8</option>
 				<option>9-10</option>
@@ -84,7 +84,7 @@
        		<span class="" style="color: grey;">
 				<b>Note</b>
 			</span>
-			<textarea class="input100" id="user" name="inParam5" placeholder="Inserisci Note" 
+			<textarea class="input100" id="note" name="inParam5" placeholder="Inserisci Note" 
 			style="resize: none; height: 75px;" onkeyup="countChar(this)"></textarea>
 			<div id="charNum"></div>
 		</div>

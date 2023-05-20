@@ -367,6 +367,9 @@
 		debugger;
 		
 	});
+	function mofify() {
+		$('#isModify').val("1");
+	}
 </script>
 
 <!-- Modal -->
@@ -381,7 +384,7 @@
         <span id="textModal"></span>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Rielabora Questo</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="modify();">Rielabora Questo</button>
         <button type="button" class="btn btn-primary" onclick="location.reload();">Nuovo Pagamento</button>
       </div>
     </div>

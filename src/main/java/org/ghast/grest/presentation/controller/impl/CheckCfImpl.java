@@ -3,6 +3,9 @@ package org.ghast.grest.presentation.controller.impl;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -11,21 +14,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.Parameter;
 import org.ghast.grest.architecture.model.Login;
 import org.ghast.grest.architecture.model.StoreProcedureResult;
+import org.ghast.grest.buisness.model.GrestModel;
 import org.ghast.grest.presentation.controller.UniversalController;
-import org.ghast.grest.presentation.controller.impl.SaveReceiptImpl.SerializedObj;
-import org.ghast.grest.presentation.model.GetUserInfoReturn;
+import org.ghast.grest.presentation.controller.Util;
 import org.ghast.grest.presentation.model.Grest;
-import org.ghast.grest.presentation.model.LoginValidReturn;
+import org.ghast.grest.presentation.model.PersonSubList;
 import org.ghast.grest.presentation.model.SuccessReturn;
 
 import com.google.gson.Gson;
-import com.opensymphony.xwork2.ActionContext;
 
-public class UpdatePersonAndSubImpl extends UniversalController {
+public class CheckCfImpl extends UniversalController {
 
 	/**
 	 * 
@@ -39,9 +40,9 @@ public class UpdatePersonAndSubImpl extends UniversalController {
 		
 		String serviceLocator = "grest";
 		String sPPackage = "";
-		String storedProcedureName = "UpdatePersonAndSub";
+		String storedProcedureName = "CheckCf";
 		
-		int inParamsNum = 26;
+		int inParamsNum = 1;
 		
 		params.put("serviceLocator", serviceLocator);
 		params.put("sPPackage", sPPackage);
@@ -61,9 +62,6 @@ public class UpdatePersonAndSubImpl extends UniversalController {
 		
 		params.put("resultClass", clazz);
 		
-		List<Integer> outParams = new ArrayList<Integer>();
-		params.put("outParams", outParams);
-		
 		return params;
 	}
 
@@ -74,7 +72,7 @@ public class UpdatePersonAndSubImpl extends UniversalController {
 	}
 
 	@Override
-	public HashMap<String, Object> manageInputParams(LinkedHashMap<String, Object> inParams, 
+	public HashMap<String, Object> manageInputParams(LinkedHashMap<String, Object> inParams,
 			Login login) {
 		// TODO Auto-generated method stub
 		return inParams;
@@ -112,5 +110,7 @@ public class UpdatePersonAndSubImpl extends UniversalController {
 	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;
 	}
+	
+	
 
 }

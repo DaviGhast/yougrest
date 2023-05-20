@@ -27,6 +27,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/util.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/home.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/onepcssgrid.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.css">
 <!--===============================================================================================-->
 	  	
 	<style type="text/css">
@@ -246,6 +247,7 @@
 	<script src="<%=request.getContextPath()%>/vendor/tilt/tilt.jquery.min.js"></script>
 <!--===============================================================================================-->
 	<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.js"></script>
 <!--===============================================================================================-->
 	
 	<script >
@@ -397,7 +399,6 @@
 <div class="modal fade" id="insertNewPersonModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl modal-dialog-centered">
 		<div class="modal-content">
-			<form id="insertNewPersonForm" action="InsertNewPerson.action">
 			<div class="modal-header">
 				<div class="fs-4">
 					<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" 
@@ -415,9 +416,8 @@
 			</div>
 	      	<div class="modal-footer" style="background-color: #ffffff">
 	      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-				<button type="submit" class="btn btn-success">Salva</button>
+				<button type="submit" class="btn btn-success" onclick="insertNewPerson();">Salva</button>
 	        </div>
-	        </form>
    		</div>
 	</div>
 </div>
@@ -426,7 +426,6 @@
 <div class="modal fade" id="insertNewSubModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl modal-dialog-centered">
 		<div class="modal-content">
-			<form id="insertNewSubForm" action="InsertNewSub.action">
 			<div class="modal-header">
 				<div class="fs-4">
 					<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" 
@@ -444,50 +443,137 @@
 			</div>
 	      	<div class="modal-footer" style="background-color: #ffffff">
 	      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-				<button type="submit" class="btn btn-success">Salva</button>
+				<button type="submit" class="btn btn-success" onclick="insertNewSub();">Salva</button>
 	        </div>
-	        </form>
    		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
-	$(document).ready( function () {
-		if (${result[0].action == "InsertNewPerson"}){
-			$('#SuccessModal').modal('show');
-		}
-	});
-	function success() {
-		debugger;
-		if (${result[0].action == "InsertNewPerson"}){
-	        $('#insertNewSubModal').modal('show');
-	        $('#subSurname').val(${result[0].surname});
-	        $('#subIdPerson').val(${result[0].id});
-	        $('#subName').val(${result[0].name});
-	        $('#subClass').val(${result[0].school_class});
-		} else {
-			window.top.location.href="toSubsPage.action?";
-		}
-    }
+	function insertNewPerson() {
+		var url = 'CheckCf.action?inParam1=';
+		url = url.replace('inParam1=', 'inParam1='+$('#cf').val());
+		var updatePersonAndSub = $.ajax({url: url, type: 'POST', cache: false});
+		updatePersonAndSub.done( function (responseData) {
+			var json = JSON.parse(responseData);
+			if (json.data[0].success == '1') {
+				$( function() {
+					$("#dialog-alert").prop("title", "Attenzione");
+					$("#dialog-alert").html("Codice Fiscale già usato da un'altra anagrafica");
+				    $( "#dialog-alert" ).dialog({
+				      resizable: false,
+				      height: "auto",
+				      width: 400,
+				      modal: true,
+				      buttons: {
+				        Ok: function() {
+				          $( this ).dialog( "close" );
+				        }
+				      }
+				    });
+				    $(".ui-dialog").css({
+				        zIndex: '1060',
+				        top: '100px'
+				      });
+				  } );
+			}
+			else {
+				var url = 'InsertNewPerson.action?inParam1=&inParam2=&inParam3=&inParam4=&inParam5=&inParam6='+
+				'&inParam7=&inParam8=&inParam9=&inParam10=&inParam11=&inParam12=&inParam13=&inParam14='+
+				'&inParam15=&inParam16=&inParam17=&inParam18=&inParam19=';
+		        url = url.replace('inParam1=', 'inParam1='+$('#surname').val());
+		        url = url.replace('inParam2=', 'inParam2='+$('#name').val());
+		        url = url.replace('inParam3=', 'inParam3='+$('#sex').val());
+		        url = url.replace('inParam4=', 'inParam4='+$('#birth_date').val());
+		        url = url.replace('inParam5=', 'inParam5='+$('#birth_city').val());
+		        url = url.replace('inParam6=', 'inParam6='+$('#cf').val());
+		        url = url.replace('inParam7=', 'inParam7='+$('#school_class').val());
+		        url = url.replace('inParam8=', 'inParam8='+$('#residence_address').val());
+		        url = url.replace('inParam9=', 'inParam9='+$('#residence_city').val());
+		        url = url.replace('inParam10=', 'inParam10='+$('#nationality').val());
+		        url = url.replace('inParam11=', 'inParam11='+$('#father').val());
+		        url = url.replace('inParam12=', 'inParam12='+$('#mother').val());
+		        url = url.replace('inParam13=', 'inParam13='+$('#inputPhoneList').val());
+		        url = url.replace('inParam14=', 'inParam14='+$('#inputIceList').val());
+		        url = url.replace('inParam15=', 'inParam15='+$('#inputEmailList').val());
+		        url = url.replace('inParam16=', 'inParam16='+$('#inputPrivacy').val());
+		        url = url.replace('inParam17=', 'inParam17='+$('#inputExit').val());
+		        url = url.replace('inParam18=', 'inParam18='+$('#inputPhoto').val());
+		        url = url.replace('inParam19=', 'inParam19='+$('#inputRescue').val());
+		        var updatePersonAndSub = $.ajax({url: url, type: 'POST', cache: false});
+		        updatePersonAndSub.done( function (responseData) {
+					var json = JSON.parse(responseData);
+					if (json.data[0].success == '1') {
+						$( function() {
+							$("#dialog-success").prop("title", "Operazione Eseguita");
+							$("#dialog-success").html("Scheda Persona inserita con Successo!!!");
+						    $( "#dialog-success" ).dialog({
+						      resizable: false,
+						      height: "auto",
+						      width: 400,
+						      modal: true,
+						      buttons: {
+						        Ok: function() {
+						          $( this ).dialog( "close" );
+						          $('#insertNewPersonModal').modal('hide');
+						          $('#insertNewSubModal').modal('show');
+						          $('#subSurname').val(json.data[0].surname);
+						          $('#subIdPerson').val(json.data[0].id);
+						          $('#subName').val(json.data[0].name);
+						          $('#subClass').val(json.data[0].school_class);
+						        }
+						      }
+						    });
+						    $(".ui-dialog").css({
+						        zIndex: '1060',
+						        top: '100px'
+						      });
+						  } );
+					}
+				});
+			}
+		});
+		
+	}
+	function insertNewSub() {
+		var url = 'InsertNewSub.action?inParam1=&inParam2=&inParam3=&inParam4=&inParam5=&inParam6=';
+        url = url.replace('inParam1=', 'inParam1='+$('#subIdPerson').val());
+        url = url.replace('inParam2=', 'inParam2='+$('#subOratory').val());
+        url = url.replace('inParam3=', 'inParam3='+$('#squad').val());
+        url = url.replace('inParam4=', 'inParam4='+$('#tshirt').val());
+        url = url.replace('inParam5=', 'inParam5='+$('#note').val());
+        url = url.replace('inParam6=', 'inParam6=${sessionScope.login.selectedGrest.id}');
+        var updatePersonAndSub = $.ajax({url: url, type: 'POST', cache: false});
+        updatePersonAndSub.done( function (responseData) {
+			var json = JSON.parse(responseData);
+			if (json.data[0].success == '1') {
+				$( function() {
+					$("#dialog-success").prop("title", "Operazione Eseguita");
+					$("#dialog-success").html("Scheda Iscritto inserita con Successo!!!");
+				    $( "#dialog-success" ).dialog({
+				      resizable: false,
+				      height: "auto",
+				      width: 400,
+				      modal: true,
+				      buttons: {
+				        Ok: function() {
+				          $( this ).dialog( "close" );
+				          location.reload();
+				        }
+				      }
+				    });
+				    $(".ui-dialog").css({
+				        zIndex: '1060',
+				        top: '100px'
+				      });
+				  } );
+			}
+		});
+	}
 </script>
 
-<!-- Modal -->
-<div class="modal fade" id="SuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Operazione Effettuata Con Successo!!!</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="success()">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="dialog-alert" title=""></div>
+<div id="dialog-success" title=""></div>
 
 </body>
 </html>

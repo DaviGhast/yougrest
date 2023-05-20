@@ -121,10 +121,10 @@
 				});
 				
 			} else {
-				alert("Inserire Tipologia del Pagamento prima di Stampare!")
+				alert("Inserire Tipologia del Pagamento prima di Stampare!");
 			}
 		} else {
-			alert("Inserire Importo del Pagamento prima di Stampare!")
+			alert("Inserire Importo del Pagamento prima di Stampare!");
 		}
 		
 	}
@@ -148,6 +148,7 @@
 					if (json.data[0].success == '1') {
 						$('#textModal').text("Salvataggio "+Number(i+2)+"/"+Number(slots+1)+" fatto!!! Aggiornata scheda SubWeek");
 					} else {
+						alert("Inserire Importo del Pagamento prima di Stampare!");
 						$('#textModal').text("Salvataggio "+Number(i+2)+"/"+Number(slots+1)+" non eseguito!!! riprovare");
 						
 					}
@@ -189,7 +190,16 @@
 				}
 			});
 		}
-		save3();
+		if ($('#isModify').val() == '0') {
+			save3();
+		} else {
+			if ($('#isModifyId').val() != '') {
+				update3();
+			} else {
+				save3();
+			}
+		}
+		
 	}
 	function save3() {
 		debugger;
@@ -218,6 +228,42 @@
 			debugger;
 			var json = JSON.parse(responseData);
 			if (json.data[0].success != '0') {
+				$('#isModifyId').val(json.data[0].id);
+				$('#textModal').text("Salvataggio Pagamento fatto!!!");
+			} else {
+				$('#textModal').text("Salvataggio Pagamento non eseguito!!! riprovare");
+			}
+		});
+	}
+	function update3() {
+		debugger;
+		var textHeader = $('#receiptHeader').val();
+		var header = textHeader.split('\n');
+		var dateTime = header[0].replace('Data e Ora: ', '');
+		var data = dateTime.split(" ")[0];
+		var time = dateTime.split(" ")[1];
+		//$('#dateTime').val(dateTime);
+		var payments = $('#receiptRaw').val();
+		$('#payments').val(payments);
+		
+		var url = 'UpdateReceipt.action?inParam1=&inParam2=&inParam3=&inParam4=&inParam5=&inParam6=&inParam7=&inParam8=&inParam9=&inParam10=&inParam11=';
+		url = url.replace('inParam1=', 'inParam1='+$('#amount').val());
+		url = url.replace('inParam2=', 'inParam2='+$('#typePayment').val());
+		url = url.replace('inParam3=', 'inParam3='+$('#total').val());
+		url = url.replace('inParam4=', 'inParam4='+$('#rest').val());
+		url = url.replace('inParam5=', 'inParam5='+data);
+		url = url.replace('inParam6=', 'inParam6='+time);
+		url = url.replace('inParam7=', 'inParam7='+$('#payments').val());
+		url = url.replace('inParam8=', 'inParam8=${sessionScope.login.location}');
+		url = url.replace('inParam9=', 'inParam9=${result[0].oratory_location}');
+		url = url.replace('inParam10=', 'inParam10=${result[1].id}');
+		url = url.replace('inParam11=', 'inParam11='+$('#isModifyId').val());
+		var updateSubPayment = $.ajax({url: url, type: 'POST', cache: false});
+		updateSubPayment.done( function (responseData) {
+			debugger;
+			var json = JSON.parse(responseData);
+			if (json.data[0].success != '0') {
+				$('#isModifyId').val(json.data[0].id);
 				$('#textModal').text("Salvataggio Pagamento fatto!!!");
 			} else {
 				$('#textModal').text("Salvataggio Pagamento non eseguito!!! riprovare");
@@ -226,6 +272,9 @@
 	}
 
 </script>
+
+<input id="isModify" type="hidden" readonly="readonly" value="0">
+<input id="isModifyId" type="hidden" readonly="readonly" value="">
 
 <div class="container-fluid login100-form-title fs-1">
 	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 

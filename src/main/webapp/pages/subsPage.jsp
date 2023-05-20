@@ -27,6 +27,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/util.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/home.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/onepcssgrid.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.css">
 <!--===============================================================================================-->
 	  	
 	<style type="text/css">
@@ -246,6 +247,7 @@
 	<script src="<%=request.getContextPath()%>/vendor/tilt/tilt.jquery.min.js"></script>
 <!--===============================================================================================-->
 	<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.js"></script>
 <!--===============================================================================================-->
 	
 	<script >
@@ -468,39 +470,6 @@
 		
 	</div>
 	
-<!-- Added Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-xl modal-dialog-centered">
-		<div class="modal-content">
-			<form id="myForm" action="">
-			<div class="modal-header">
-				<div class="fs-4">
-					<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" 
-					class="bi bi-person-vcard-fill fs-2" viewBox="0 0 18 18">
-			 			<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/>
-					</svg>
-					<span class="">Nuova Scheda Anagrafica Iscritto</span>
-				</div>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body" style="background-color: #ecf0f1">
-				
-				<jsp:include page="/modals/insertNewSub.jsp"></jsp:include>
-							
-			</div>
-	      	<div class="modal-footer" style="background-color: #ffffff">
-	      		<span id="alert">0</span>
-	      		<div class="alert alert-danger" role="alert" style="display: none;">
-	      			Error
-	      		</div>
-	      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-				<button type="submit" class="btn btn-success">Salva</button>
-	        </div>
-	        </form>
-   		</div>
-	</div>
-</div>
-
 <!-- Modify Modal -->
 <div class="modal fade" id="modifyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl modal-dialog-centered">
@@ -521,10 +490,6 @@
 							
 			</div>
 	      	<div class="modal-footer" style="background-color: #ffffff">
-	      		<span id="alert">0</span>
-	      		<div class="alert alert-danger" role="alert" style="display: none;">
-	      			Error
-	      		</div>
 	      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
 				<button type="submit" class="btn btn-success" onclick="save();">Salva</button>
 	        </div>
@@ -539,40 +504,66 @@
 		
 	});
 	function save() {
-		var url = 'UpdatePersonAndSub.action?inParam1=';
+		debugger;
+		var url = 'UpdatePersonAndSub.action?inParam1=&inParam2=&inParam3=&inParam4=&inParam5=&inParam6='+
+				'&inParam7=&inParam8=&inParam9=&inParam10=&inParam11=&inParam12=&inParam13=&inParam14='+
+				'&inParam15=&inParam16=&inParam17=&inParam18=&inParam19=&inParam20=&inParam21=&inParam22='+
+				'&inParam23=&inParam24=&inParam25=&inParam26=';
         url = url.replace('inParam1=', 'inParam1='+$('#surname').val());
         url = url.replace('inParam2=', 'inParam2='+$('#name').val());
-        url = url.replace('inParam1=', 'inParam1='+$('#sex').val());
-        url = url.replace('inParam2=', 'inParam2='+$('#birth_date').val());
-        url = url.replace('inParam1=', 'inParam1='+$('#surname').val());
-        url = url.replace('inParam2=', 'inParam2='+$('#name').val());
-        url = url.replace('inParam1=', 'inParam1='+$('#sex').val());
-        url = url.replace('inParam2=', 'inParam2='+$('#birth_date').val());
-        url = url.replace('inParam1=', 'inParam1='+$('#surname').val());
-        url = url.replace('inParam2=', 'inParam2='+$('#name').val());
-        url = url.replace('inParam1=', 'inParam1='+$('#sex').val());
-        url = url.replace('inParam2=', 'inParam2='+$('#birth_date').val());
-        url = url.replace('inParam1=', 'inParam1='+$('#surname').val());
-        url = url.replace('inParam2=', 'inParam2='+$('#name').val());
-        url = url.replace('inParam1=', 'inParam1='+$('#sex').val());
-        url = url.replace('inParam2=', 'inParam2='+$('#birth_date').val());
-        url = url.replace('inParam1=', 'inParam1='+$('#surname').val());
-        url = url.replace('inParam2=', 'inParam2='+$('#name').val());
-        url = url.replace('inParam1=', 'inParam1='+$('#sex').val());
-        url = url.replace('inParam2=', 'inParam2='+$('#birth_date').val());
-        url = url.replace('inParam1=', 'inParam1='+$('#surname').val());
-        url = url.replace('inParam2=', 'inParam2='+$('#name').val());
-        url = url.replace('inParam1=', 'inParam1='+$('#sex').val());
-        url = url.replace('inParam2=', 'inParam2='+$('#birth_date').val());
-        url = url.replace('inParam1=', 'inParam1='+$('#sex').val());
-        url = url.replace('inParam2=', 'inParam2='+$('#birth_date').val());
-        var indicatorsMenu = $.ajax({url: url, type: 'POST', cache: false});
-		indicatorsMenu.done( function (responseData) {
+        url = url.replace('inParam3=', 'inParam3='+$('#sex').val());
+        url = url.replace('inParam4=', 'inParam4='+$('#birth_date').val());
+        url = url.replace('inParam5=', 'inParam5='+$('#birth_city').val());
+        url = url.replace('inParam6=', 'inParam6='+$('#cf').val());
+        url = url.replace('inParam7=', 'inParam7='+$('#residence_address').val());
+        url = url.replace('inParam8=', 'inParam8='+$('#residence_city').val());
+        url = url.replace('inParam9=', 'inParam9='+$('#school_class').val());
+        url = url.replace('inParam10=', 'inParam10='+$('#father').val());
+        url = url.replace('inParam11=', 'inParam11='+$('#mother').val());
+        url = url.replace('inParam12=', 'inParam12='+$('#inputPhoneList').val());
+        url = url.replace('inParam13=', 'inParam13='+$('#inputIceList').val());
+        url = url.replace('inParam14=', 'inParam14='+$('#inputEmailList').val());
+        url = url.replace('inParam15=', 'inParam15='+$('#inputExit').val());
+        url = url.replace('inParam16=', 'inParam16='+$('#inputPhoto').val());
+        url = url.replace('inParam17=', 'inParam17='+$('#inputPrivacy').val());
+        url = url.replace('inParam18=', 'inParam18='+$('#inputRescue').val());
+        url = url.replace('inParam19=', 'inParam19='+$('#nationality').val());
+        url = url.replace('inParam20=', 'inParam20='+$('#formIdPerson').val());
+        url = url.replace('inParam21=', 'inParam21='+$('#squad').val());
+        url = url.replace('inParam22=', 'inParam22='+$('#tshirt').val());
+        url = url.replace('inParam23=', 'inParam23='+$('#note').val());
+        url = url.replace('inParam24=', 'inParam24='+$('#subOratory').val());
+        url = url.replace('inParam25=', 'inParam25='+$('#formIdSub').val());
+        url = url.replace('inParam26=', 'inParam26=${sessionScope.login.selectedGrest.id}');
+        var updatePersonAndSub = $.ajax({url: url, type: 'POST', cache: false});
+        updatePersonAndSub.done( function (responseData) {
 			var json = JSON.parse(responseData);
-			
+			if (json.data[0].success == '1') {
+				$( function() {
+					$("#dialog-success").html("Scheda Persona e Iscritto Aggiornate con Successo!!!");
+				    $( "#dialog-success" ).dialog({
+				      resizable: false,
+				      height: "auto",
+				      width: 400,
+				      modal: true,
+				      buttons: {
+				        Ok: function() {
+				          $( this ).dialog( "close" );
+				          location.reload();
+				        }
+				      }
+				    });
+				    $(".ui-dialog").css({
+				        zIndex: '1060',
+				        top: '100px'
+				      });
+				  } );
+			}
 		});
 	}
 </script>
+
+<div id="dialog-success" title="Operazione Eseguita"></div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

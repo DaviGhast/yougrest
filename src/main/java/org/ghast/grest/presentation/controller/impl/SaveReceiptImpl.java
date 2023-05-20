@@ -20,6 +20,7 @@ import org.ghast.grest.presentation.controller.UniversalController;
 import org.ghast.grest.presentation.controller.Util;
 import org.ghast.grest.presentation.model.Grest;
 import org.ghast.grest.presentation.model.PersonSubList;
+import org.ghast.grest.presentation.model.SuccessAndIdReturn;
 import org.ghast.grest.presentation.model.SuccessReturn;
 
 import com.google.gson.Gson;
@@ -47,7 +48,7 @@ public class SaveReceiptImpl extends UniversalController {
 		params.put("sPName", storedProcedureName);
 		params.put("inParamsNum", inParamsNum);
 		
-		String resultClass = "org.ghast.grest.presentation.model.SuccessReturn";
+		String resultClass = "org.ghast.grest.presentation.model.SuccessAndIdReturn";
 		Class clazz = null;
 		if (resultClass != null && !resultClass.trim().equalsIgnoreCase("")) {
 			try {
@@ -87,7 +88,7 @@ public class SaveReceiptImpl extends UniversalController {
 			Login login, String result) {
 		// TODO Auto-generated method stub
 		
-		List<SuccessReturn> res = (List<SuccessReturn>) spr.getResult();
+		List<SuccessAndIdReturn> res = (List<SuccessAndIdReturn>) spr.getResult();
 		SerializedObj resSer = new SerializedObj();
 		resSer.data = res;
 		inputStream = new ByteArrayInputStream(new Gson().toJson(resSer).getBytes());
@@ -98,7 +99,7 @@ public class SaveReceiptImpl extends UniversalController {
 	}
 	
 	public class SerializedObj implements Serializable {
-		protected List<SuccessReturn> data;
+		protected List<SuccessAndIdReturn> data;
 	}
 
 	public InputStream getInputStream() {

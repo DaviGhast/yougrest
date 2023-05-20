@@ -1,5 +1,8 @@
 package org.ghast.grest.presentation.controller.impl;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -13,11 +16,14 @@ import org.apache.struts2.dispatcher.Parameter;
 import org.ghast.grest.architecture.model.Login;
 import org.ghast.grest.architecture.model.StoreProcedureResult;
 import org.ghast.grest.presentation.controller.UniversalController;
+import org.ghast.grest.presentation.controller.impl.InsertNewPersonImpl.SerializedObj;
 import org.ghast.grest.presentation.model.GetUserInfoReturn;
 import org.ghast.grest.presentation.model.Grest;
+import org.ghast.grest.presentation.model.InsertPersonReturn;
 import org.ghast.grest.presentation.model.LoginValidReturn;
 import org.ghast.grest.presentation.model.SuccessReturn;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 
 public class InsertNewSubImpl extends UniversalController {
@@ -26,6 +32,7 @@ public class InsertNewSubImpl extends UniversalController {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private InputStream inputStream;
 
 	@Override
 	public HashMap<String, Object> setParams(HashMap<String, Object> params, Login login) {
@@ -72,8 +79,8 @@ public class InsertNewSubImpl extends UniversalController {
 			Login login) {
 		// TODO Auto-generated method stub
 		
-		Grest grest = login.getSelectedGrest();
-		inParams.put("inParam6", grest.getId());
+		//Grest grest = login.getSelectedGrest();
+		//inParams.put("inParam6", grest.getId());
 		
 		return inParams;
 	}
@@ -89,16 +96,27 @@ public class InsertNewSubImpl extends UniversalController {
 			Login login, String result) {
 		// TODO Auto-generated method stub
 		@SuppressWarnings("unchecked")
-		List<SuccessReturn> listObject = (List<SuccessReturn>) spr.getResult();
 		
-		if (!listObject.isEmpty()) {
-			result = SUCCESS;
-		}
-		else {
-			result = ERROR;
-		}
+		List<SuccessReturn> res = (List<SuccessReturn>) spr.getResult();
+		SerializedObj resSer = new SerializedObj();
+		resSer.data = res;
+		inputStream = new ByteArrayInputStream(new Gson().toJson(resSer).getBytes());
+		
+		result = "stream";
 		
 		return result;
+	}
+	
+	public class SerializedObj implements Serializable {
+		protected List<SuccessReturn> data;
+	}
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
 	}
 
 }

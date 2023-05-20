@@ -154,12 +154,16 @@
     	
     	<action name="InsertNewPerson" 
  			class="org.ghast.grest.presentation.controller.impl.InsertNewPersonImpl">
- 			<result name="success">/pages/newSubPage.jsp</result>
+ 			<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
     	</action>
     	
     	<action name="InsertNewSub" 
  			class="org.ghast.grest.presentation.controller.impl.InsertNewSubImpl">
- 			<result name="success">/pages/newSubPage.jsp</result>
+ 			<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
     	</action>
     	
     	<action name="UpdatePersonAndSub" 
@@ -198,6 +202,13 @@
     	
     	<action name="SaveReceipt" 
     		class="org.ghast.grest.presentation.controller.impl.SaveReceiptImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="UpdateReceipt" 
+    		class="org.ghast.grest.presentation.controller.impl.UpdateReceiptImpl">
     		<result name="stream" type="stream">
       			<param name="contentType">text/plain</param>
       		</result>
@@ -295,6 +306,13 @@
     	
     	<action name="CheckAuthExit"
     		class="org.ghast.grest.presentation.controller.impl.CheckAuthExitImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="CheckCf"
+    		class="org.ghast.grest.presentation.controller.impl.CheckCfImpl">
     		<result name="stream" type="stream">
       			<param name="contentType">text/plain</param>
       		</result>

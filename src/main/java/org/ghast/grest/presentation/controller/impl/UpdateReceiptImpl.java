@@ -3,6 +3,7 @@ package org.ghast.grest.presentation.controller.impl;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -11,21 +12,20 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.Parameter;
 import org.ghast.grest.architecture.model.Login;
 import org.ghast.grest.architecture.model.StoreProcedureResult;
+import org.ghast.grest.buisness.model.GrestModel;
 import org.ghast.grest.presentation.controller.UniversalController;
-import org.ghast.grest.presentation.controller.impl.SaveReceiptImpl.SerializedObj;
-import org.ghast.grest.presentation.model.GetUserInfoReturn;
+import org.ghast.grest.presentation.controller.Util;
 import org.ghast.grest.presentation.model.Grest;
-import org.ghast.grest.presentation.model.LoginValidReturn;
+import org.ghast.grest.presentation.model.PersonSubList;
+import org.ghast.grest.presentation.model.SuccessAndIdReturn;
 import org.ghast.grest.presentation.model.SuccessReturn;
 
 import com.google.gson.Gson;
-import com.opensymphony.xwork2.ActionContext;
 
-public class UpdatePersonAndSubImpl extends UniversalController {
+public class UpdateReceiptImpl extends UniversalController {
 
 	/**
 	 * 
@@ -39,16 +39,16 @@ public class UpdatePersonAndSubImpl extends UniversalController {
 		
 		String serviceLocator = "grest";
 		String sPPackage = "";
-		String storedProcedureName = "UpdatePersonAndSub";
+		String storedProcedureName = "UpdateReceipt";
 		
-		int inParamsNum = 26;
+		int inParamsNum = 10;
 		
 		params.put("serviceLocator", serviceLocator);
 		params.put("sPPackage", sPPackage);
 		params.put("sPName", storedProcedureName);
 		params.put("inParamsNum", inParamsNum);
 		
-		String resultClass = "org.ghast.grest.presentation.model.SuccessReturn";
+		String resultClass = "org.ghast.grest.presentation.model.SuccessAndIdReturn";
 		Class clazz = null;
 		if (resultClass != null && !resultClass.trim().equalsIgnoreCase("")) {
 			try {
@@ -61,9 +61,6 @@ public class UpdatePersonAndSubImpl extends UniversalController {
 		
 		params.put("resultClass", clazz);
 		
-		List<Integer> outParams = new ArrayList<Integer>();
-		params.put("outParams", outParams);
-		
 		return params;
 	}
 
@@ -74,7 +71,7 @@ public class UpdatePersonAndSubImpl extends UniversalController {
 	}
 
 	@Override
-	public HashMap<String, Object> manageInputParams(LinkedHashMap<String, Object> inParams, 
+	public HashMap<String, Object> manageInputParams(LinkedHashMap<String, Object> inParams,
 			Login login) {
 		// TODO Auto-generated method stub
 		return inParams;
@@ -91,7 +88,7 @@ public class UpdatePersonAndSubImpl extends UniversalController {
 			Login login, String result) {
 		// TODO Auto-generated method stub
 		
-		List<SuccessReturn> res = (List<SuccessReturn>) spr.getResult();
+		List<SuccessAndIdReturn> res = (List<SuccessAndIdReturn>) spr.getResult();
 		SerializedObj resSer = new SerializedObj();
 		resSer.data = res;
 		inputStream = new ByteArrayInputStream(new Gson().toJson(resSer).getBytes());
@@ -102,7 +99,7 @@ public class UpdatePersonAndSubImpl extends UniversalController {
 	}
 	
 	public class SerializedObj implements Serializable {
-		protected List<SuccessReturn> data;
+		protected List<SuccessAndIdReturn> data;
 	}
 
 	public InputStream getInputStream() {
@@ -112,5 +109,7 @@ public class UpdatePersonAndSubImpl extends UniversalController {
 	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;
 	}
+	
+	
 
 }
