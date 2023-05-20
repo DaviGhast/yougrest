@@ -312,7 +312,7 @@
 								    		<tr>
 								    			<td>${res1.location}</td>
 								    			<td>
-								    				${result[2][res1.id-1]} &euro;
+								    				${result[2][res.id-1][res1.id-1]} &euro;
 								    			</td>
 								    		</tr>
 										</c:forEach>

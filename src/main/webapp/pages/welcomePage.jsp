@@ -249,23 +249,24 @@
 			            	defaultContent: '<button type="button" '+
 			            	'class="btn btn-success btn-sm dt-view" style="margin-left:5px; margin-right:16px;" '+
 			            	'title="inserisci" onclick="addToRegister(this)">'+
-			            		'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" '+
-			            		'fill="currentColor" class="bi bi-person-vcard-fill" '+
-			            		'viewBox="0 0 16 16">'+
-					 				'<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 '+
-					 				'2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 '+
-					 				'0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 '+
-					 				'2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 '+
-					 				'10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 '+
-					 				'13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/>'+
+			            		'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"'+
+			            		'class="bi bi-file-earmark-plus fs-6" viewBox="0 0 16 16">'+
+			            		'<path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0'+
+			            		' 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>'+
 								'</svg>'+
-			            	'</button>'
+			            	'</button>'+
+			            	'<button type="button" '+
+				            	'class="btn btn-danger btn-sm dt-view" style="margin-left:5px; margin-right:16px;" '+
+				            	'title="Rimuovi" onclick="removeToRegister(this)">'+
+				            	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"'+
+				            	'class="bi bi-pencil-square" viewBox="0 0 16 16">'+
+				            	'<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0'+
+				            	' 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 '+
+				            	'0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>'+
+				            	'</svg>'+
+				            '</button>'
 			            }
-					],
-			        dom: 'Bfrtip',
-			        buttons: [
-			        	'excel'
-			        ]
+					]
 			    });
 			}
 		});
@@ -380,6 +381,37 @@
 				}
     			
     		});
+		}
+		function removeToRegister(ele) {
+			tempEle = ele;
+			$('#confRemove').modal('show');
+			var dataRow = $('#subWeek').DataTable().row($(ele).closest('tr')).data();
+			$('#confSubText').text(dataRow.surname+' '+dataRow.name);
+			$('#confRegisterText').text($('#registerType').text());
+		}
+		function confRemove() {
+			removeRegister(tempEle);
+		}
+		function removeRegister(ele) {
+			var dataRow = $('#subWeek').DataTable().row($(ele).closest('tr')).data();
+			var url = 'RemoveRegister.action?inParam1=&inParam2=&inParam3=&inParam4=&inParam5=&inParam6=&inParam7=';
+			url = url.replace('inParam1=', 'inParam1='+$('#registerType').text().trim());
+			url = url.replace('inParam2=', 'inParam2=${result[0]}');
+			url = url.replace('inParam3=', 'inParam3=${result[1]}');
+			url = url.replace('inParam4=', 'inParam4='+dataRow.id);
+			var defaultGrest = $.ajax({url: url, type: 'POST', cache: false});
+    		defaultGrest.done( function (responseData) {
+    			debugger;
+    			var json = JSON.parse(responseData);
+    			$('#succesModal').modal('show');
+    			if (json.data[0].success == '0') {
+    				 $('#result').text("Rimosso con Successo!!");
+    			} else {
+    				$('#result').text("Errore Inserimento Non Effettuato!!");
+				}
+    			
+    		});
+				
 		}
 		function openCard(evt, type) {
 			debugger;
@@ -650,6 +682,35 @@
 	</div>
 </div>
 
+<!-- confPool Modal -->
+<div class="modal fade" id="confRemove" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="fs-4">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
+					class="bi bi-journal-text fs-2" viewBox="0 0 16 16">
+					  <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+					  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+					  <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+					</svg>
+					<span class="">Conferma</span>
+				</div>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body alert alert-warning">
+				<span id="">Sei davvero sicuro di voler Rimuovere </span><span id="confSubText"></span>
+				<span id=""> dal registro </span><span id="confRegisterText"></span>
+				<span id=""> ?</span>
+			</div>
+	      	<div class="modal-footer" style="background-color: #ffffff">
+	      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+	      		<button type="button" class="btn btn-primary" onclick="confRemove()">Conferma</button>			
+	        </div>
+   		</div>
+	</div>
+</div>
+
 <!-- succesModal Modal -->
 <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
@@ -670,7 +731,7 @@
 				<span id="result"></span>	
 			</div>
 	      	<div class="modal-footer" style="background-color: #ffffff">
-	      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+	      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
 	      						
 	        </div>
    		</div>

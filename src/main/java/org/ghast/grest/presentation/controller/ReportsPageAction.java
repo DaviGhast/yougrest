@@ -149,16 +149,23 @@ public class ReportsPageAction extends ActionSupport {
 				//position 1
 				resList.add(receipts);
 				
-			List<Double> reports = new ArrayList<Double>();
+			List<Object> reports = new ArrayList<Object>();
 			for (Oratory2 oratory : oratories) {
-				double report = 0.0;
-				for (Receipt2 receipt : receipts) {
-					if (receipt.getSub_oratory_location().equals(oratory.getLocation())) {
-						report += Double.parseDouble(receipt.getTotal());
+				List<Double> reportsOratory = new ArrayList<Double>();
+				for (Oratory2 oratory1 : oratories) {
+					double report = 0.0;
+					for (Receipt2 receipt : receipts) {
+						if (receipt.getPayment_oratory_location().equals(oratory.getLocation())) {
+							if (receipt.getSub_oratory_location().equals(oratory1.getLocation())) {
+								report += Double.parseDouble(receipt.getTotal());
+							}
+						}
 					}
+					reportsOratory.add(report);
 				}
-				reports.add(report);
+				reports.add(reportsOratory);
 			}
+			
 			//position 2
 			resList.add(reports);
 			

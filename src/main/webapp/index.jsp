@@ -140,8 +140,8 @@
 					</div> -->
 				</form>
 				
-				<div class="login100-form-title copyright">
-					<p>Negozio On-line<sup>&copy;</sup></p>
+				<div class="login100-form-title copyright" style="padding-bottom: 0px; padding-top: 54px;">
+					<p>Davide Mainardi 2023<sup>&copy;</sup></p>
 				</div>
 				
 			</div>

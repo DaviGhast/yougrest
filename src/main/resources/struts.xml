@@ -283,6 +283,13 @@
       		</result>
     	</action>
     	
+    	<action name="RemoveRegister"
+    		class="org.ghast.grest.presentation.controller.impl.RemoveRegisterImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
     	<action name="RegisterDuplicate"
     		class="org.ghast.grest.presentation.controller.impl.RegisterDuplicateImpl">
     		<result name="stream" type="stream">
