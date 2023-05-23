@@ -383,11 +383,15 @@
     		});
 		}
 		function removeToRegister(ele) {
-			tempEle = ele;
-			$('#confRemove').modal('show');
-			var dataRow = $('#subWeek').DataTable().row($(ele).closest('tr')).data();
-			$('#confSubText').text(dataRow.surname+' '+dataRow.name);
-			$('#confRegisterText').text($('#registerType').text());
+			if ( $('#registerType').text().trim() == '') {
+				alert("Seleziona prima un registro");
+			} else {
+				tempEle = ele;
+				$('#confRemove').modal('show');
+				var dataRow = $('#subWeek').DataTable().row($(ele).closest('tr')).data();
+				$('#confSubText').text(dataRow.surname+' '+dataRow.name);
+				$('#confRegisterText').text($('#registerType').text());
+			}
 		}
 		function confRemove() {
 			removeRegister(tempEle);
@@ -403,6 +407,7 @@
     		defaultGrest.done( function (responseData) {
     			debugger;
     			var json = JSON.parse(responseData);
+    			$('#confRemove').modal('hide');
     			$('#succesModal').modal('show');
     			if (json.data[0].success == '0') {
     				 $('#result').text("Rimosso con Successo!!");

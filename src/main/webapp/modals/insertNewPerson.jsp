@@ -124,16 +124,16 @@
 
 	<div class="item-menu"  style="width: 49%;">
       	<span class="" style="color: grey;">
-			<b>Cognome</b>
+			<b>Cognome*</b>
 		</span>
-		<input class="input100" type="text" id="surname" name="inParam1" placeholder="User" required="required">
+		<input class="input100" type="text" id="surname" name="inParam1" placeholder="Inserisci" required="required">
 	</div>
 	
 	<div class="item-menu"  style="width: 49%;">
       		<span class="" style="color: grey;">
-			<b>Nome</b>
+			<b>Nome*</b>
 		</span>
-		<input class="input100" type="text" id="name" name="inParam2" placeholder="User" required="required">
+		<input class="input100" type="text" id="name" name="inParam2" placeholder="Inserisci" required="required">
 	</div>
 	
 </div>
@@ -142,9 +142,9 @@
 
 	<div class="item-menu"  style="width: 33%;">
       		<span class="" style="color: grey;">
-			<b>Genere</b>
+			<b>Genere*</b>
 		</span>
-		<select class="input100" type="text" id="sex" name="inParam3" placeholder="User" required="required">
+		<select class="input100" type="text" id="sex" name="inParam3" placeholder="Inserisci" required="required">
 			<option value="M">Maschio</option>
 			<option value="F">Femmina</option>
 		</select>
@@ -152,16 +152,16 @@
       
     <div class="item-menu"  style="width: 33%;">
       	<span class="" style="color: grey;">
-			<b>Data Nascita</b>
+			<b>Data Nascita*</b>
 		</span>
-		<input class="input100" type="date" id="birth_date" name="inParam4" placeholder="User" required="required">
+		<input class="input100" type="date" id="birth_date" name="inParam4" placeholder="Inserisci" required="required">
 	</div>
 	
 	<div class="item-menu"  style="width: 33%;">
       		<span class="" style="color: grey;">
 			<b>Comune Nascita*</b>
 		</span>
-		<input class="input100" type="text" id="birth_city" name="inParam5" placeholder="User" required="required">
+		<input class="input100" type="text" id="birth_city" name="inParam5" placeholder="Inserisci" required="required">
 	</div>
 	
 </div>
@@ -172,14 +172,14 @@
       		<span class="" style="color: grey;">
 			<b>Codice Fiscale*</b>
 		</span>
-		<input class="input100" type="text" id="cf" name="inParam6" placeholder="User" required="required">
+		<input class="input100" type="text" id="cf" name="inParam6" placeholder="Inserisci" required="required">
 	</div>
 	
 	<div class="item-menu"  style="width: 49%;">
       		<span class="" style="color: grey;">
 			<b>Classe*</b>
 		</span>
-		<select class="input100" type="text" id="school_class" name="inParam7" placeholder="User" required="required">
+		<select class="input100" type="text" id="school_class" name="inParam7" placeholder="Inserisci" required="required">
 			<option value=""></option>
 			<option value="1_ELEMENTARE">1^ ELEMENTARE</option>
 			<option value="2_ELEMENTARE">2^ ELEMENTARE</option>
@@ -203,14 +203,14 @@
       		<span class="" style="color: grey;">
 			<b>Indirizzo Residenza*</b>
 		</span>
-		<input class="input100" type="text" id="school_class" name="inParam8" placeholder="User" required="required">
+		<input class="input100" type="text" id="residence_address" name="inParam8" placeholder="Inserisci" required="required">
 	</div>
 	
 	<div class="item-menu"  style="width: 33%;">
       		<span class="" style="color: grey;">
 			<b>Comune Residenza*</b>
 		</span>
-		<input class="input100" type="text" id="residence_city" name="inParam9" placeholder="User" required="required">
+		<input class="input100" type="text" id="residence_city" name="inParam9" placeholder="Inserisci" required="required">
 	</div>
 	
 	  
@@ -218,7 +218,7 @@
       	<span class="" style="color: grey;">
 			<b>Nazionalità</b>
 		</span>
-		<input class="input100" type="text" id="nationality" name="inParam10" placeholder="User" required="required">
+		<input class="input100" type="text" id="nationality" name="inParam10" placeholder="Inserisci">
 	</div>
 	
 </div>
@@ -229,14 +229,14 @@
       	<span class="" style="color: grey;">
 			<b>Nominativo Padre*</b>
 		</span>
-		<input class="input100" type="text" id="father" name="inParam11" placeholder="User" required="required">
+		<input class="input100" type="text" id="father" name="inParam11" placeholder="Inserisci" required="required">
 	</div>
 	
 	<div class="item-menu"  style="width: 49%;">
       		<span class="" style="color: grey;">
 			<b>Nominativo Madre*</b>
 		</span>
-		<input class="input100" type="text" id="mother" name="inParam12" placeholder="User" required="required">
+		<input class="input100" type="text" id="mother" name="inParam12" placeholder="Inserisci" required="required">
 	</div>
 	
 </div>
