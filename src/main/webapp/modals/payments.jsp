@@ -20,7 +20,6 @@
 		    	$('#inputExoneration').val('0');
 		  	}
 			$('#amount').val('0');
-			$('#typePayment').val('POS');
 			$('#rest').val('0');
 		});
 		$("#discount").on('change', function() {
@@ -42,6 +41,10 @@
 		  	}
 			
 		});
+		if ($("#inputExoneration").val() == '1') {
+			$('#amount').val('0');
+			$('#rest').val('0');
+		}
 		document.getElementById("defaultOpen").click();
 		reloadReceipt('');
 	});

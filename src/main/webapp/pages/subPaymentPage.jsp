@@ -367,7 +367,7 @@
 		debugger;
 		
 	});
-	function mofify() {
+	function modify() {
 		$('#isModify').val("1");
 	}
 </script>
