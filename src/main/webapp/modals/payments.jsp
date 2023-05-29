@@ -43,20 +43,22 @@
 		});
 		if ($("#inputExoneration").val() == '1') {
 			$('#amount').val('0');
-			$('#rest').val('0');
 		}
+		$('#rest').val('0');
 		document.getElementById("defaultOpen").click();
 		reloadReceipt('');
 	});
 	function reloadReceipt(txt) {
 		debugger;
 		var textReceipt = $('#receiptRaw').val();
-		if (textReceipt.includes(txt)) {
-			textReceipt = textReceipt.replace(txt+';', '');
-		} else {
-			textReceipt += txt+';';
+		if (txt.trim() != '') {
+			if (textReceipt.includes(txt)) {
+				textReceipt = textReceipt.replace(txt+';', '');
+			} else {
+				textReceipt += txt+';';
+			}
+			$('#receiptRaw').val(textReceipt);
 		}
-		$('#receiptRaw').val(textReceipt);
 		var amount = 0.0;
 		if ($('#amount').val() != ''){
 			amount = $('#amount').val();

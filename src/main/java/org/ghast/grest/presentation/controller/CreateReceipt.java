@@ -77,9 +77,9 @@ public class CreateReceipt extends ActionSupport {
 			String surnameAndName = Util.getStringParam(parameters, "inParam1");
 			String oratory = Util.getStringParam(parameters, "inParam2");
 			String rawbody = Util.getStringParam(parameters, "inParam3");
-			String amount = Util.getStringParam(parameters, "inParam4");
+			String amount = String.valueOf(Double.parseDouble(Util.getStringParam(parameters, "inParam4")));
 			String type = Util.getStringParam(parameters, "inParam5");
-			String rest = Util.getStringParam(parameters, "inParam6");
+			String rest = String.valueOf(Double.parseDouble(Util.getStringParam(parameters, "inParam6")));
 			String exoneration = Util.getStringParam(parameters, "inParam7");
 			
 			Receipt receipt = new Receipt();
