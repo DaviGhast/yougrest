@@ -41,7 +41,7 @@ public class UpdateReceiptImpl extends UniversalController {
 		String sPPackage = "";
 		String storedProcedureName = "UpdateReceipt";
 		
-		int inParamsNum = 10;
+		int inParamsNum = 12;
 		
 		params.put("serviceLocator", serviceLocator);
 		params.put("sPPackage", sPPackage);

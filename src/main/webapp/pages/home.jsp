@@ -162,6 +162,10 @@
 		<div class="container-login100" 
 			style="margin-top: 5%; height: 92%; min-height: 82vh; background: transparent;">	
 			
+			<c:if test="${sessionScope.login.role eq 'A'}">
+				<jsp:include page="/pages/segreteria.jsp"></jsp:include>
+			</c:if>
+			
 			<c:if test="${sessionScope.login.role eq 'S'}">
 				<jsp:include page="/pages/segreteria.jsp"></jsp:include>
 			</c:if>

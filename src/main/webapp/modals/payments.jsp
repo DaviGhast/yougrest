@@ -217,7 +217,7 @@
 		var payments = $('#receiptRaw').val();
 		$('#payments').val(payments);
 		
-		var url = 'SaveReceipt.action?inParam1=&inParam2=&inParam3=&inParam4=&inParam5=&inParam6=&inParam7=&inParam8=&inParam9=&inParam10=';
+		var url = 'SaveReceipt.action?inParam1=&inParam2=&inParam3=&inParam4=&inParam5=&inParam6=&inParam7=&inParam8=&inParam9=&inParam10=&inParam11=';
 		url = url.replace('inParam1=', 'inParam1='+$('#amount').val());
 		url = url.replace('inParam2=', 'inParam2='+$('#typePayment').val());
 		url = url.replace('inParam3=', 'inParam3='+$('#total').val());
@@ -228,6 +228,7 @@
 		url = url.replace('inParam8=', 'inParam8=${sessionScope.login.location}');
 		url = url.replace('inParam9=', 'inParam9=${result[0].oratory_location}');
 		url = url.replace('inParam10=', 'inParam10=${result[1].id}');
+		url = url.replace('inParam11=', 'inParam11=${sessionScope.login.username}');
 		var updateSubPayment = $.ajax({url: url, type: 'POST', cache: false});
 		updateSubPayment.done( function (responseData) {
 			debugger;
@@ -251,7 +252,7 @@
 		var payments = $('#receiptRaw').val();
 		$('#payments').val(payments);
 		
-		var url = 'UpdateReceipt.action?inParam1=&inParam2=&inParam3=&inParam4=&inParam5=&inParam6=&inParam7=&inParam8=&inParam9=&inParam10=&inParam11=';
+		var url = 'UpdateReceipt.action?inParam1=&inParam2=&inParam3=&inParam4=&inParam5=&inParam6=&inParam7=&inParam8=&inParam9=&inParam10=&inParam11=&inParam12=';
 		url = url.replace('inParam1=', 'inParam1='+$('#amount').val());
 		url = url.replace('inParam2=', 'inParam2='+$('#typePayment').val());
 		url = url.replace('inParam3=', 'inParam3='+$('#total').val());
@@ -263,6 +264,7 @@
 		url = url.replace('inParam9=', 'inParam9=${result[0].oratory_location}');
 		url = url.replace('inParam10=', 'inParam10=${result[1].id}');
 		url = url.replace('inParam11=', 'inParam11='+$('#isModifyId').val());
+		url = url.replace('inParam12=', 'inParam12=${sessionScope.login.username}');
 		var updateSubPayment = $.ajax({url: url, type: 'POST', cache: false});
 		updateSubPayment.done( function (responseData) {
 			debugger;

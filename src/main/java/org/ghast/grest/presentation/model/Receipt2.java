@@ -13,6 +13,7 @@ public class Receipt2 {
 	private String sub_oratory_location;
 	private String payment_oratory_location;
 	private String sub_payment_id;
+	private String username;
 	private String surname;
 	private String name;
 	private String exoneration;
@@ -82,6 +83,12 @@ public class Receipt2 {
 	}
 	public void setSub_payment_id(String sub_payment_id) {
 		this.sub_payment_id = sub_payment_id;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getSurname() {
 		return surname;

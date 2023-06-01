@@ -3,6 +3,8 @@ package org.ghast.grest.presentation.controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -33,6 +35,7 @@ import org.ghast.grest.presentation.model.Receipt2;
 import org.ghast.grest.presentation.model.Week;
 import org.ghast.grest.presentation.model.SubPayment;
 import org.ghast.grest.presentation.model.SubWeek;
+import org.ghast.grest.presentation.model.User;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -121,6 +124,39 @@ public class ReportsPageAction extends ActionSupport {
 				//position 0
 				resList.add(oratories);
 				
+			//GetAllUser
+				List<User> users = null;
+				inParams = new LinkedHashMap<String, Object>();
+				serviceLocator = "grest";
+				sPPackage = "";
+				storedProcedureName = "GetAllUserByRole";
+				inParamsNum = 0;
+				resultClass = "org.ghast.grest.presentation.model.User";
+				clazz = null;
+				if (resultClass != null && !resultClass.trim().equalsIgnoreCase("")) {
+					try {
+						clazz = Class.forName(resultClass);
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				item = new StoreProcedureResult();
+				item = spm.callSP(serviceLocator, storedProcedureName, inParams.values().toArray(), 
+						outParams.toArray(), clazz);
+				if (item.getStatus().equals("B")) {
+					result = ERROR;
+				}
+				users = (ArrayList<User>) item.getResult();
+				Collections.sort(users, new Comparator<User>() {
+				    @Override
+				    public int compare(User o1, User o2) {
+				        return o1.getUsername().compareTo(o2.getUsername());
+				    }
+				});
+				//position 1
+				resList.add(users);
+				
 			//GetReceiptByDate
 				List<Receipt2> receipts = null;
 				inParams = new LinkedHashMap<String, Object>();
@@ -146,28 +182,52 @@ public class ReportsPageAction extends ActionSupport {
 					result = ERROR;
 				}
 				receipts = (ArrayList<Receipt2>) item.getResult();
-				//position 1
+				//position 2
 				resList.add(receipts);
 				
 			List<Object> reports = new ArrayList<Object>();
 			for (Oratory2 oratory : oratories) {
-				List<Double> reportsOratory = new ArrayList<Double>();
+				List<Object> reportsOratory = new ArrayList<Object>();
 				for (Oratory2 oratory1 : oratories) {
-					double report = 0.0;
+					List<Object> reportsColumns = new ArrayList<Object>();
+					double totReport = 0.0;
 					for (Receipt2 receipt : receipts) {
 						if (receipt.getPayment_oratory_location().equals(oratory.getLocation())) {
 							if (receipt.getSub_oratory_location().equals(oratory1.getLocation())) {
-								report += Double.parseDouble(receipt.getTotal());
+								totReport += Double.parseDouble(receipt.getTotal());
 							}
 						}
 					}
-					reportsOratory.add(report);
+					reportsColumns.add(totReport);
+					for (User user : users) {
+						double totCont = 0.0;
+						double totPos = 0.0;
+						for (Receipt2 receipt : receipts) {
+							if (receipt.getUsername().equals(user.getUsername())) {
+								if (receipt.getPayment_oratory_location().equals(oratory.getLocation())) {
+									if (receipt.getSub_oratory_location().equals(oratory1.getLocation())) {
+										if (receipt.getType().equals("CONT")) {
+											totCont += Double.parseDouble(receipt.getTotal());
+										} else {
+											totPos += Double.parseDouble(receipt.getTotal());
+										}
+									}
+								}
+							}
+						}
+						String string = "CONT: "+String.valueOf(totCont)+" &euro;<br/>"+"POS: "+String.valueOf(totPos)+" &euro;";
+						reportsColumns.add(string);
+					}
+					reportsOratory.add(reportsColumns);
 				}
 				reports.add(reportsOratory);
 			}
 			
-			//position 2
+			//position 3
 			resList.add(reports);
+			
+			//position 4
+			resList.add(users.size());
 			
 			object.setResult(resList);
 			

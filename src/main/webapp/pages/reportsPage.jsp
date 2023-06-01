@@ -263,7 +263,7 @@
 		<jsp:include page="/pages/nav_page.jsp"></jsp:include>
 	</header>
 	
-	<div style="margin-top: 8%; height: 92%; min-height: 92%">
+	<div style="margin-top: 5%; height: 92%; min-height: 92%">
 		
 		<c:if test="${empty sessionScope.login}">
 			<script type="text/javascript">
@@ -273,9 +273,9 @@
 		
 		<div class="limiter" >
 	
-			<div class="container-login100" style="margin-top: 8%; height: 92%; min-height: 82vh; background: transparent;">
+			<div class="container-login100" style="margin-top: 5%; height: 92%; min-height: 82vh; background: transparent;">
 				
-				<div class="wrap-login100" style="border: 1px solid;">
+				<div class="wrap-login100" style="border: 1px solid; width: auto;">
 					<div class="container-fluid login100-form-title fs-1">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
 						class="bi bi-wallet-fill fs-2" viewBox="0 0 16 16">
@@ -286,17 +286,18 @@
 							Pagina Resoconto Incassi di Oggi
 						</span>
 					</div>
+					
 					<c:forEach var="res" items="${result[0]}">
 				
-						<div class="wrap-login100" style="border: 1px solid;">
+						<div class="wrap-login100" style="border: 1px solid; width: auto; margin-bottom: 10px;">
 							
-							<div class="container-fluid login100-form-title fs-4">
+							<div class="container-fluid login100-form-title fs-4" style="padding-bottom: 20px;">
 								<!-- <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" 
 								class="bi bi-person-vcard-fill fs-3" viewBox="0 0 18 18">
 					 				<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/>
 								</svg> -->
 								<span class="">
-									Segreteria Oratorio ${res.location}
+									Segreteria di ${res.location}
 								</span>
 							</div>
 							<div class="table-responsive" style="width:100%">
@@ -304,7 +305,10 @@
 								    <thead>
 								        <tr>
 								            <th>Incassi per Oratorio</th>
-								            <th>Euro Incassati</th>
+								            <th>Euro Totali</th>
+								            <c:forEach var="user" items="${result[1]}">
+								            	<th>${user.username}</th>
+								            </c:forEach>
 								        </tr>
 								    </thead>
 								    <tbody>
@@ -312,8 +316,13 @@
 								    		<tr>
 								    			<td>${res1.location}</td>
 								    			<td>
-								    				${result[2][res.id-1][res1.id-1]} &euro;
+								    				${result[3][res.id-1][res1.id-1][0]} &euro;
 								    			</td>
+								    			<c:forEach var = "i" begin = "1" end = "${result[4]}">
+									            	<td>
+									    				${result[3][res.id-1][res1.id-1][i]}
+									    			</td>
+									            </c:forEach>
 								    		</tr>
 										</c:forEach>
 								    </tbody>
