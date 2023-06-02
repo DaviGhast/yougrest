@@ -271,6 +271,8 @@
 				$('#register_wrapper').css('display','none');
 				$('#subWeek').css('display','none');
 				$('#subWeek_wrapper').css('display','none');
+				$('#subLunch').css('display','none');
+				$('#subLunch_wrapper').css('display','none');
 			  document.getElementById("defaultOpen1"+cardName).click();
 			  
 		}
@@ -291,11 +293,15 @@
 				$('#register_wrapper').css('display','none');
 				$('#subWeek').css('display','none');
 				$('#subWeek_wrapper').css('display','none');
+				$('#subLunch').css('display','none');
+				$('#subLunch_wrapper').css('display','none');
 		}
 		function openRegister(week, day, type) {
 			debugger;
 			$('#register').css('display','block');
 			$('#register_wrapper').css('display','block');
+			$('#subLunch').css('display','none');
+			$('#subLunch_wrapper').css('display','none');
 			$('#subWeek').css('display','none');
 			$('#subWeek_wrapper').css('display','none');
 			var url = 'GetRegisterByType.action?inParam1=&inParam2=&inParam3=&inParam4=&inParam5=';
@@ -389,6 +395,8 @@
 		function openSubWeekList(week) {
 			$('#subWeek').css('display','block');
 			$('#subWeek_wrapper').css('display','block');
+			$('#subLunch').css('display','none');
+			$('#subLunch_wrapper').css('display','none');
 			$('#register').css('display','none');
 			$('#register_wrapper').css('display','none');
 			var url = 'GetSubWeekList.action?inParam1=&inParam2=&inParam3=';
@@ -412,7 +420,9 @@
 		        	{ data: 'id' },
 		            { data: 'surname' },
 		            { data: 'name' },
-		            { data: 'school_class' }
+		            { data: 'school_class' },
+		            { data: 'phone' },
+		            { data: 'ice_number' }
 		        ],
 		        dom: 'Bfrtip',
 		        buttons: [
@@ -430,6 +440,8 @@
 		function openGetSubPoolList(week) {
 			$('#subWeek').css('display','block');
 			$('#subWeek_wrapper').css('display','block');
+			$('#subLunch').css('display','none');
+			$('#subLunch_wrapper').css('display','none');
 			$('#register').css('display','none');
 			$('#register_wrapper').css('display','none');
 			var url = 'GetSubPoolList.action?inParam1=&inParam2=&inParam3=';
@@ -453,7 +465,9 @@
 		        	{ data: 'id' },
 		            { data: 'surname' },
 		            { data: 'name' },
-		            { data: 'school_class' }
+		            { data: 'school_class' },
+		            { data: 'phone' },
+		            { data: 'ice_number' }
 		        ],
 		        dom: 'Bfrtip',
 		        buttons: [
@@ -471,6 +485,8 @@
 		function openGetSubTripList(week) {
 			$('#subWeek').css('display','block');
 			$('#subWeek_wrapper').css('display','block');
+			$('#subLunch').css('display','none');
+			$('#subLunch_wrapper').css('display','none');
 			$('#register').css('display','none');
 			$('#register_wrapper').css('display','none');
 			var url = 'GetSubTripList.action?inParam1=&inParam2=&inParam3=';
@@ -494,7 +510,9 @@
 		        	{ data: 'id' },
 		            { data: 'surname' },
 		            { data: 'name' },
-		            { data: 'school_class' }
+		            { data: 'school_class' },
+		            { data: 'phone' },
+		            { data: 'ice_number' }
 		        ],
 		        dom: 'Bfrtip',
 		        buttons: [
@@ -511,8 +529,10 @@
         }
 		function openSubLunchList(week, day) {
 			debugger;
-			$('#subWeek').css('display','block');
-			$('#subWeek_wrapper').css('display','block');
+			$('#subLunch').css('display','block');
+			$('#subLunch_wrapper').css('display','block');
+			$('#subWeek').css('display','none');
+			$('#subWeek_wrapper').css('display','none');
 			$('#register').css('display','none');
 			$('#register_wrapper').css('display','none');
 			var url = 'GetSubLunchList.action?inParam1=&inParam2=&inParam3=&inParam4=';
@@ -521,10 +541,10 @@
 			url = url.replace('inParam3=', 'inParam3=${sessionScope.login.selectedGrest.id}');
 			url = url.replace('inParam4=', 'inParam4=${sessionScope.login.oratory.id}');
 			if ( $.fn.dataTable.isDataTable( '#subWeek' ) ) {
-			    table = $('#subWeek').DataTable();
+			    table = $('#subLunch').DataTable();
 			    table.destroy();
 			}
-			table = $('#subWeek').DataTable({
+			table = $('#subLunch').DataTable({
 		    	language: {
 		            url: 'https://cdn.datatables.net/plug-ins/a5734b29083/i18n/Italian.json',
 		        },
@@ -537,7 +557,8 @@
 		        	{ data: 'id' },
 		            { data: 'surname' },
 		            { data: 'name' },
-		            { data: 'school_class' }
+		            { data: 'school_class' },
+		            { data: 'note' }
 		        ],
 		        dom: 'Bfrtip',
 		        buttons: [
@@ -841,6 +862,21 @@
 							           	<th>Cognome</th>
 							            <th>Nome</th>
 							            <th>Classe</th>
+							            <th>Telefono</th>
+							            <th>Numero ICE</th>
+							        </tr>
+							    </thead>
+							</table>
+						</div>
+						<div class="subLunchContainer" style="width:100%;">
+							<table id="subLunch" class="table display nowrap" style=" display: none;">
+							    <thead>
+							        <tr>
+							            <th>ID</th>
+							           	<th>Cognome</th>
+							            <th>Nome</th>
+							            <th>Classe</th>
+							            <th>Note</th>
 							        </tr>
 							    </thead>
 							</table>

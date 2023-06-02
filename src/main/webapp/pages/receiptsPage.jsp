@@ -278,6 +278,7 @@
 		            { data: 'sub_oratory_location' },
 		            { data: 'payment_oratory_location' },
 		            { data: 'sub_payment_id' },
+		            { data: 'username' },
 		            { data: 'surname' },
 		            { data: 'name' },
 		            { data: 'exoneration' }
@@ -296,15 +297,11 @@
 		        		visible: false
 		        	},
 		        	{
-		        		targets: 12,
-		        		visible: false
-		        	},
-		        	{
-		        		targets: 13,
-		        		visible: false
-		        	},
-		        	{
 		        		targets: 14,
+		        		visible: false
+		        	},
+		        	{
+		        		targets: 15,
 		        		orderable: false,
 		            	data: null,
 		            	defaultContent: '<button type="button" '+
@@ -424,6 +421,7 @@
 						            <th>Frequenta</th>
 						            <th>Pagamento</th>
 						            <th>ID Iscrizione Pagamento</th>
+						            <th>Utente</th>
 						            <th>Cognome</th>
 						            <th>Nome</th>
 						            <th>Esonerato</th>

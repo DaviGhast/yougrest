@@ -1,13 +1,12 @@
 package org.ghast.grest.presentation.model;
 
-public class SubWeekList {
+public class SubLunchList {
 	
 	private String id;
 	private String surname;
 	private String name;
 	private String school_class;
-	private String phone;
-	private String ice_number;
+	private String note;
 	
 	public String getId() {
 		return id;
@@ -33,19 +32,12 @@ public class SubWeekList {
 	public void setSchool_class(String school_class) {
 		this.school_class = school_class;
 	}
-	public String getPhone() {
-		return phone;
+	public String getNote() {
+		return note;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setNote(String note) {
+		this.note = note;
 	}
-	public String getIce_number() {
-		return ice_number;
-	}
-	public void setIce_number(String ice_number) {
-		this.ice_number = ice_number;
-	}
-	
 	
 	
 		

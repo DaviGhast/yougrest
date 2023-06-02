@@ -22,6 +22,7 @@ import org.ghast.grest.presentation.model.Grest;
 import org.ghast.grest.presentation.model.PersonSubList;
 import org.ghast.grest.presentation.model.Receipt2;
 import org.ghast.grest.presentation.model.Register;
+import org.ghast.grest.presentation.model.SubLunchList;
 import org.ghast.grest.presentation.model.SubWeekList;
 
 import com.google.gson.Gson;
@@ -49,7 +50,7 @@ public class GetSubLunchListImpl extends UniversalController {
 		params.put("sPName", storedProcedureName);
 		params.put("inParamsNum", inParamsNum);
 		
-		String resultClass = "org.ghast.grest.presentation.model.SubWeekList";
+		String resultClass = "org.ghast.grest.presentation.model.SubLunchList";
 		Class clazz = null;
 		if (resultClass != null && !resultClass.trim().equalsIgnoreCase("")) {
 			try {
@@ -89,7 +90,7 @@ public class GetSubLunchListImpl extends UniversalController {
 			Login login, String result) {
 		// TODO Auto-generated method stub
 		
-		List<SubWeekList> res = (List<SubWeekList>) spr.getResult();
+		List<SubLunchList> res = (List<SubLunchList>) spr.getResult();
 		SerializedObj resSer = new SerializedObj();
 		resSer.data = res;
 		inputStream = new ByteArrayInputStream(new Gson().toJson(resSer).getBytes());
@@ -100,7 +101,7 @@ public class GetSubLunchListImpl extends UniversalController {
 	}
 	
 	public class SerializedObj implements Serializable {
-		protected List<SubWeekList> data;
+		protected List<SubLunchList> data;
 	}
 
 	public InputStream getInputStream() {
