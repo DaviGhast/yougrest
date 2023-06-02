@@ -263,8 +263,22 @@
       		</result>
     	</action>
     	
+    	<action name="GetAllSubLunchList"
+    		class="org.ghast.grest.presentation.controller.impl.GetAllSubLunchListImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
     	<action name="GetSubPoolList"
     		class="org.ghast.grest.presentation.controller.impl.GetSubPoolListImpl">
+    		<result name="stream" type="stream">
+      			<param name="contentType">text/plain</param>
+      		</result>
+    	</action>
+    	
+    	<action name="GetSubTripList"
+    		class="org.ghast.grest.presentation.controller.impl.GetSubTripListImpl">
     		<result name="stream" type="stream">
       			<param name="contentType">text/plain</param>
       		</result>

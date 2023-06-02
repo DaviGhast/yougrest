@@ -573,6 +573,50 @@
 		        ]
 		    });
         }
+		function openAllSubLunchList() {
+			debugger;
+			$('#subLunch').css('display','block');
+			$('#subLunch_wrapper').css('display','block');
+			$('#subWeek').css('display','none');
+			$('#subWeek_wrapper').css('display','none');
+			$('#register').css('display','none');
+			$('#register_wrapper').css('display','none');
+			var url = 'GetAllSubLunchList.action?inParam1=&inParam2=';
+			url = url.replace('inParam1=', 'inParam1=${sessionScope.login.selectedGrest.id}');
+			url = url.replace('inParam2=', 'inParam2=${sessionScope.login.oratory.id}');
+			if ( $.fn.dataTable.isDataTable( '#subWeek' ) ) {
+			    table = $('#subLunch').DataTable();
+			    table.destroy();
+			}
+			table = $('#subLunch').DataTable({
+		    	language: {
+		            url: 'https://cdn.datatables.net/plug-ins/a5734b29083/i18n/Italian.json',
+		        },
+		        ajax: {
+		            url: url,
+		            method: "POST",
+		            contentType: 'application/json'
+		        },
+		        columns: [
+		        	{ data: 'id' },
+		            { data: 'surname' },
+		            { data: 'name' },
+		            { data: 'school_class' },
+		            { data: 'note' }
+		        ],
+		        dom: 'Bfrtip',
+		        buttons: [
+		            {
+		                extend: 'excelHtml5',
+		                title: 'Lista Iscritti Pranzo Generale'
+		            },
+		            {
+		                extend: 'pdfHtml5',
+		                title: 'Lista Iscritti Pranzo Generale'
+		            }
+		        ]
+		    });
+        }
 	</script>
 
 </head>
@@ -606,6 +650,16 @@
 							Registri ed Elenchi
 						</span>
 					</div>
+					
+					<div class="container-fluid login100-form-title" style="padding-bottom: 0px;">
+						<button class="btn btn-primary" 
+				      	onclick="openAllSubLunchList()">
+							<span class="fs-6">
+								<b>Elenco Iscritti Pranzo Generale</b>
+							</span>
+						</button>
+					</div>
+					
 					<div class="wrap-div" style="width: 100%;">
 			
 						<c:forEach var="res" items="${result[1]}">
@@ -772,7 +826,7 @@
 											      	<button class="btn btn-success"
 											      	onclick="openRegister('${res.num}', '${i}', 'Piscina')">
 														<span class="fs-6">
-															<b>Presenze Gita</b>
+															<b>Presenze Piscina</b>
 														</span>
 													</button>
 												</div>

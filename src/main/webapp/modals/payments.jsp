@@ -225,8 +225,8 @@
 		url = url.replace('inParam5=', 'inParam5='+data);
 		url = url.replace('inParam6=', 'inParam6='+time);
 		url = url.replace('inParam7=', 'inParam7='+$('#payments').val());
-		url = url.replace('inParam8=', 'inParam8=${sessionScope.login.location}');
-		url = url.replace('inParam9=', 'inParam9=${result[0].oratory_location}');
+		url = url.replace('inParam8=', 'inParam8=${result[0].oratory_location}');
+		url = url.replace('inParam9=', 'inParam9=${sessionScope.login.location}');
 		url = url.replace('inParam10=', 'inParam10=${result[1].id}');
 		url = url.replace('inParam11=', 'inParam11=${sessionScope.login.username}');
 		var updateSubPayment = $.ajax({url: url, type: 'POST', cache: false});
@@ -260,8 +260,8 @@
 		url = url.replace('inParam5=', 'inParam5='+data);
 		url = url.replace('inParam6=', 'inParam6='+time);
 		url = url.replace('inParam7=', 'inParam7='+$('#payments').val());
-		url = url.replace('inParam8=', 'inParam8=${sessionScope.login.location}');
-		url = url.replace('inParam9=', 'inParam9=${result[0].oratory_location}');
+		url = url.replace('inParam8=', 'inParam8=${result[0].oratory_location}');
+		url = url.replace('inParam9=', 'inParam9=${sessionScope.login.location}');
 		url = url.replace('inParam10=', 'inParam10=${result[1].id}');
 		url = url.replace('inParam11=', 'inParam11='+$('#isModifyId').val());
 		url = url.replace('inParam12=', 'inParam12=${sessionScope.login.username}');
